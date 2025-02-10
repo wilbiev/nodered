@@ -6,13 +6,13 @@ A Node Red flow to daily renew SmartThings access tokens.
 
 1. Create public https connection Home Assistant [Home Assistant Remote Access for FREE - DuckDNS + LetsEncrypt + Single URL](https://www.youtube.com/watch?v=AK5E2T5tWyM). The redirectURL is: “https://<your_url>:1880/endpoint/smartapp"
 1. Change the settings.js file (location: /addon_configs/xxxxxxxx_nodered) of Node Red to enable persistent variables, add:
-```
-contextStorage: {
-	storeInFile: { module: "localfilesystem"},
-    default    : { module: "memory" }
-}, 
-```
-and restart Node Red. Additional information: [A guide to understanding Persistent Context](https://discourse.nodered.org/t/a-guide-to-understanding-persistent-context/4115)
+    ```
+    contextStorage: {
+	    storeInFile: { module: "localfilesystem"},
+        default    : { module: "memory" }
+    }, 
+    ```
+    and restart Node Red. Additional information: [A guide to understanding Persistent Context](https://discourse.nodered.org/t/a-guide-to-understanding-persistent-context/4115)
 1. Deploy the SmartApp flow in Node Red – import the “smartapp oauth2 v1.0.json” file in Node Red
 1. Create a SmartApp in [SmartThings Developer Workspace](https://developer.smartthings.com/workspace), using the redirectUrl. Write down the App Name, AppID, ClientID, Client Secret.
 1. Enter the variables AppName, AppId, ClientId, ClientSecret in Node Red node "Set Variables"
