@@ -5,7 +5,7 @@ A Node Red flow to daily renew SmartThings access tokens.
 ## Instructions for installation:
 
 1. Create public https connection Home Assistant [Home Assistant Remote Access for FREE - DuckDNS + LetsEncrypt + Single URL](https://www.youtube.com/watch?v=AK5E2T5tWyM). The redirectURL is: “https://<your_url>:1880/endpoint/smartapp"
-1. Change the settings.js file (location: /addon_configs/xxxxxxxx_nodered) of Node Red to enable persistent variables, add:
+1. OPTIONAL: Change the settings.js file (location: /addon_configs/xxxxxxxx_nodered) of Node Red to enable persistent variables, add:
     ```
     contextStorage: {
 	    storeInFile: { module: "localfilesystem"},
