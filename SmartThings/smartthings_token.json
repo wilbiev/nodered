@@ -1,0 +1,1491 @@
+[
+    {
+        "id": "a315ee6acb269508",
+        "type": "tab",
+        "label": "SmartThings",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4083528b9bbd7930",
+        "type": "group",
+        "z": "a315ee6acb269508",
+        "name": "",
+        "style": {
+            "label": true,
+            "color": "#6f2fa0",
+            "fill": "#dbcbe7"
+        },
+        "nodes": [
+            "47f13965a7bbdbae",
+            "ec60d17168ad4fce",
+            "41c6db0b44bbd476",
+            "dee83ec34d1dc37a",
+            "4c23b1732b16c5a8",
+            "5acd30604cc0d291",
+            "a539b1f176fb3c86",
+            "9f9d0ed2d51eac9e",
+            "cc6390ceabe54129",
+            "0c1c53abda1a379d",
+            "194b18c5323f6110",
+            "2f78121b2d01a949",
+            "abe5c19e3bb6b750",
+            "115a8308e5e9b8af",
+            "bcb2d011edbcafb5",
+            "5f8fbed9fe2f66a9",
+            "c2b9854888371f85",
+            "56c45a6c69be8f42",
+            "5e7ae9f50d92e0a7",
+            "b86e73f864e571dd",
+            "7bc08f207b6b7b8e",
+            "ea3c404878aa4dfd",
+            "3771ed8ba5129ef1",
+            "bf62215a8c0e3eec",
+            "6d7cef354a58d62a",
+            "cac7aa87f9bcc134",
+            "caaef30a92cf035d",
+            "e0ee6b56b9974bee",
+            "55ce07defde62373"
+        ],
+        "x": 34,
+        "y": 39,
+        "w": 1092,
+        "h": 442
+    },
+    {
+        "id": "12af60b6471a3a4f",
+        "type": "group",
+        "z": "a315ee6acb269508",
+        "name": "",
+        "style": {
+            "fill": "#e3f3d3",
+            "label": true
+        },
+        "nodes": [
+            "16c0f241ebb35a24",
+            "a22b881c3eee366f",
+            "18bc09abf9114f49",
+            "ea57f9fb6bfc9f7a",
+            "5ffb3aa11b199a05",
+            "a25cc68cc3309d58",
+            "9f2aed8efc42fc21",
+            "96c86bee951d5709",
+            "79bc2a1d22357ed0",
+            "b3fdb4b925c299bd",
+            "eeca788af858dded",
+            "4927530dccc55b8c",
+            "198472be853d26f4",
+            "fa0a278079857002",
+            "b6247144844b8b18",
+            "177d7ccc76ec9bab",
+            "4557c3e66cedc086"
+        ],
+        "x": 34,
+        "y": 539,
+        "w": 932,
+        "h": 322
+    },
+    {
+        "id": "16c0f241ebb35a24",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "RefreshToken",
+        "func": "const clientID = \"<clientId>\";\nconst clientSecret = \"<clientSecret>\";\nconst redirectUrl = \"<redirectUrl>\";\nconst tokenUrl = \"https://api.smartthings.com/v1/oauth/token\";\nconst authToken = global.get(\"authToken\");\nconst refreshToken = global.get(\"refreshToken\");\n\nvar signName = clientID + \":\" + clientSecret;\nvar buffer = Buffer.from(signName, \"utf8\");\nvar sign = buffer.toString(\"base64\");\n\nmsg.headers = {\n    \"Authorization\": \"Basic \" + sign,\n    \"Content-Type\": \"application/x-www-form-urlencoded\"\n};\n\nmsg.payload = { \n    grant_type: \"refresh_token\", \n    refresh_token: refreshToken,\n    redirect_uri: redirectUrl \n };\n\nmsg.url = tokenUrl;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 640,
+        "wires": [
+            [
+                "a22b881c3eee366f"
+            ]
+        ]
+    },
+    {
+        "id": "a22b881c3eee366f",
+        "type": "http request",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 610,
+        "y": 640,
+        "wires": [
+            [
+                "18bc09abf9114f49",
+                "ea57f9fb6bfc9f7a"
+            ]
+        ]
+    },
+    {
+        "id": "18bc09abf9114f49",
+        "type": "debug",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "47f13965a7bbdbae",
+        "type": "http in",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Create SmartApp tokens",
+        "url": "/smartapp",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "41c6db0b44bbd476",
+                "5acd30604cc0d291",
+                "115a8308e5e9b8af",
+                "bcb2d011edbcafb5",
+                "b86e73f864e571dd",
+                "caaef30a92cf035d"
+            ]
+        ]
+    },
+    {
+        "id": "38d70c078e04c698",
+        "type": "comment",
+        "z": "a315ee6acb269508",
+        "name": "SmartTings SmartApp - Oauth tokens",
+        "info": "\n",
+        "x": 210,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ea57f9fb6bfc9f7a",
+        "type": "change",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Set tokens persistent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::old_authToken",
+                "pt": "global",
+                "to": "#:(storeInFile)::authToken",
+                "tot": "global",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::old_refreshToken",
+                "pt": "global",
+                "to": "#:(storeInFile)::refreshToken",
+                "tot": "global",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::authToken",
+                "pt": "global",
+                "to": "payload.access_token",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::refreshToken",
+                "pt": "global",
+                "to": "payload.refresh_token",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::timestamp",
+                "pt": "global",
+                "to": "timestamp",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "authToken",
+                "pt": "global",
+                "to": "payload.access_token",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "refreshToken",
+                "pt": "global",
+                "to": "payload.refresh_token",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "global",
+                "to": "timestamp",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 640,
+        "wires": [
+            [
+                "5ffb3aa11b199a05"
+            ]
+        ]
+    },
+    {
+        "id": "5ffb3aa11b199a05",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "SetTokens",
+        "func": "msg.payload = {\n    \"authToken\": global.get(\"authToken\"),\n    \"refreshToken\": global.get(\"refreshToken\"),\n    \"timestamp\": global.get(\"timestamp\")\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "9f2aed8efc42fc21",
+                "b3fdb4b925c299bd",
+                "a25cc68cc3309d58"
+            ]
+        ]
+    },
+    {
+        "id": "a25cc68cc3309d58",
+        "type": "ha-sensor",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "SmartThings Access Token",
+        "entityConfig": "0104105a258d245e",
+        "version": 0,
+        "state": "payload.authToken",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 740,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f2aed8efc42fc21",
+        "type": "ha-sensor",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "SmartThings Refresh Token",
+        "entityConfig": "50668aba6f7facdd",
+        "version": 0,
+        "state": "payload.refreshToken",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 740,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96c86bee951d5709",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Retrieve tokens startup",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 760,
+        "wires": [
+            [
+                "79bc2a1d22357ed0"
+            ]
+        ]
+    },
+    {
+        "id": "79bc2a1d22357ed0",
+        "type": "change",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Get tokens persistent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "authToken",
+                "pt": "global",
+                "to": "#:(storeInFile)::authToken",
+                "tot": "global",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "refreshToken",
+                "pt": "global",
+                "to": "#:(storeInFile)::refreshToken",
+                "tot": "global",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "global",
+                "to": "#:(storeInFile)::timestamp",
+                "tot": "global",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 760,
+        "wires": [
+            [
+                "5ffb3aa11b199a05"
+            ]
+        ]
+    },
+    {
+        "id": "b3fdb4b925c299bd",
+        "type": "ha-sensor",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "SmartThings Timestamp",
+        "entityConfig": "df603eac9df15582",
+        "version": 0,
+        "state": "payload.timestamp",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 730,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eeca788af858dded",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Refresh tokens",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "iso",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "60",
+        "topic": "",
+        "x": 180,
+        "y": 580,
+        "wires": [
+            [
+                "4927530dccc55b8c"
+            ]
+        ]
+    },
+    {
+        "id": "4927530dccc55b8c",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "calculateTime",
+        "func": "var createTime = Date.parse(global.get(\"timestamp\"));\nvar currentTime = Date.parse(msg.timestamp);\nvar delta = (currentTime + 900000 - createTime) / 1000;\n\nmsg.days = parseInt(delta / (60 * 60 * 24));\nmsg.hours = parseInt((delta / (60 * 60)) % 24);\nmsg.minutes = parseInt((delta / 60) % 60);\nmsg.seconds = parseInt(delta % 60);\n\nmsg.payload = 24 - msg.hours;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 580,
+        "wires": [
+            [
+                "198472be853d26f4",
+                "fa0a278079857002"
+            ]
+        ]
+    },
+    {
+        "id": "198472be853d26f4",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Days > 0",
+        "property": "days",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 580,
+        "wires": [
+            [
+                "16c0f241ebb35a24"
+            ]
+        ]
+    },
+    {
+        "id": "d1c24e132989fbd7",
+        "type": "comment",
+        "z": "a315ee6acb269508",
+        "name": "Retrieve/Resfresh token",
+        "info": "",
+        "x": 180,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "fa0a278079857002",
+        "type": "ha-sensor",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Next refresh",
+        "entityConfig": "9c7d903f06f4f403",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 170,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6247144844b8b18",
+        "type": "server-state-changed",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "HA running",
+        "server": "a962aadcdd5cb1ef",
+        "version": 6,
+        "outputs": 2,
+        "exposeAsEntityConfig": "",
+        "outputInitially": false,
+        "stateType": "habool",
+        "ifState": "true",
+        "ifStateType": "bool",
+        "ifStateOperator": "is",
+        "outputOnlyOnStateChange": true,
+        "for": "1",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": true,
+        "ignorePrevStateUnknown": true,
+        "ignorePrevStateUnavailable": true,
+        "ignoreCurrentStateUnknown": true,
+        "ignoreCurrentStateUnavailable": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "eventData"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            }
+        ],
+        "x": 160,
+        "y": 700,
+        "wires": [
+            [
+                "5ffb3aa11b199a05"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "177d7ccc76ec9bab",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "manual refresh",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "iso",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 820,
+        "wires": [
+            [
+                "16c0f241ebb35a24"
+            ]
+        ]
+    },
+    {
+        "id": "4557c3e66cedc086",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "12af60b6471a3a4f",
+        "name": "Interval 30m",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 820,
+        "wires": [
+            [
+                "5ffb3aa11b199a05"
+            ]
+        ]
+    },
+    {
+        "id": "ec60d17168ad4fce",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Configuration",
+        "func": "const appId = flow.get(\"appId\");\nconst appName = flow.get(\"appName\");\n\nif (msg.payload.configurationData.phase == \"INITIALIZE\") {\n    msg.payload = {\n            configurationData: {\n                initialize: {\n                    id: appId,\n                    firstPageId: \"1\",\n                    permissions: [\n                        \"r:devices:*\",\n                        \"w:devices:*\",\n                        \"x:devices:*\",\n                        \"r:customcapability\"\n                    ],\n                    disableCustomDisplayName: false,\n                    disableRemoveApp: false\n                }\n            }\n        };\n} else if (msg.payload.configurationData.phase == \"PAGE\") {\n    msg.payload = {\n        configurationData: {\n            page: {\n                pageId: \"1\",\n                name: appName,\n                nextPageId: null,\n                previousPageId: null,\n                complete: true,\n                sections: [\n                ]\n            }\n        }\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 240,
+        "wires": [
+            [
+                "194b18c5323f6110"
+            ]
+        ]
+    },
+    {
+        "id": "41c6db0b44bbd476",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Confirmation",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "CONFIRMATION",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "4c23b1732b16c5a8"
+            ]
+        ]
+    },
+    {
+        "id": "dee83ec34d1dc37a",
+        "type": "http request",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "a539b1f176fb3c86"
+            ]
+        ]
+    },
+    {
+        "id": "4c23b1732b16c5a8",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Confirmation",
+        "func": "msg.url = msg.payload.confirmationData.confirmationUrl;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 200,
+        "wires": [
+            [
+                "dee83ec34d1dc37a"
+            ]
+        ]
+    },
+    {
+        "id": "5acd30604cc0d291",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Configuration",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "CONFIGURATION",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "ec60d17168ad4fce"
+            ]
+        ]
+    },
+    {
+        "id": "a539b1f176fb3c86",
+        "type": "debug",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9f9d0ed2d51eac9e",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Show variables",
+        "func": "const accessToken = flow.get(\"accessToken\");\nconst apiUrl = \"https://api.smartthings.com/v1/apps\";\nconst clientId = flow.get(\"clientId\");\nconst clientSecret = flow.get(\"clientSecret\");\nconst appName = flow.get(\"appName\");\nconst appId = flow.get(\"appId\");\nconst redirectUrl = flow.get(\"redirectUrl\");\nconst authToken = global.get(\"authToken\");\nconst refreshToken = global.get(\"refreshToken\");\nconst timestamp = global.get(\"timestamp\");\n\nmsg.payload = {\n    \"appName\": appName,\n    \"appId\": appId,\n    \"clientId\": clientId,\n    \"clientSecret\": clientSecret,\n    \"accessToken\": accessToken,\n    \"redirectUrl\": redirectUrl,\n    \"authToken\": authToken,\n    \"refreshToken\": refreshToken,\n    \"timestamp\": timestamp\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 440,
+        "wires": [
+            [
+                "cc6390ceabe54129"
+            ]
+        ]
+    },
+    {
+        "id": "cc6390ceabe54129",
+        "type": "debug",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "0c1c53abda1a379d",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "step 4",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "9f9d0ed2d51eac9e"
+            ]
+        ]
+    },
+    {
+        "id": "194b18c5323f6110",
+        "type": "http response",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Send response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1020,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2f78121b2d01a949",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Set Variables",
+        "func": "const appName = \"<appName>\";\nconst appId = \"<appId>\";\nconst redirectUrl = \"<redirectUrl>\";\nconst clientId = \"<clientId>\";\nconst clientSecret = \"<clientSecret>\";\n\nflow.set(\"appName\", appName);\nflow.set(\"appId\", appId);\nflow.set(\"redirectUrl\", redirectUrl);\nflow.set(\"clientId\", clientId);\nflow.set(\"clientSecret\", clientSecret);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "abe5c19e3bb6b750",
+        "type": "inject",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "step 3",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "2f78121b2d01a949"
+            ]
+        ]
+    },
+    {
+        "id": "115a8308e5e9b8af",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Install",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "INSTALL",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "5f8fbed9fe2f66a9"
+            ]
+        ]
+    },
+    {
+        "id": "bcb2d011edbcafb5",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Update",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "UPDATE",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "5e7ae9f50d92e0a7"
+            ]
+        ]
+    },
+    {
+        "id": "5f8fbed9fe2f66a9",
+        "type": "change",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Set tokens install",
+        "rules": [
+            {
+                "t": "set",
+                "p": "authToken",
+                "pt": "global",
+                "to": "payload.installData.authToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::authToken",
+                "pt": "global",
+                "to": "payload.installData.authToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "refreshToken",
+                "pt": "global",
+                "to": "payload.installData.refreshToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::refreshToken",
+                "pt": "global",
+                "to": "payload.installData.refreshToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "global",
+                "to": "iso",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::timestamp",
+                "pt": "global",
+                "to": "iso",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "3771ed8ba5129ef1"
+            ]
+        ]
+    },
+    {
+        "id": "c2b9854888371f85",
+        "type": "comment",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "step 1: create Project/SmartApp in https://developer.smartthings.com/workspace",
+        "info": "",
+        "x": 440,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "56c45a6c69be8f42",
+        "type": "comment",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "step 2: replace variables in node Set Variables.",
+        "info": "",
+        "x": 340,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5e7ae9f50d92e0a7",
+        "type": "change",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Set tokens update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "authToken",
+                "pt": "global",
+                "to": "payload.updateData.authToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::authToken",
+                "pt": "global",
+                "to": "payload.updateData.authToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "refreshToken",
+                "pt": "global",
+                "to": "payload.updateData.refreshToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::refreshToken",
+                "pt": "global",
+                "to": "payload.updateData.refreshToken",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "global",
+                "to": "iso",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "#:(storeInFile)::timestamp",
+                "pt": "global",
+                "to": "iso",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b86e73f864e571dd",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Uninstall",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "UNINSTALL",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "7bc08f207b6b7b8e"
+            ]
+        ]
+    },
+    {
+        "id": "7bc08f207b6b7b8e",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Uninstall",
+        "func": "msg.payload = {\n    uninstallData: {}\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 360,
+        "wires": [
+            [
+                "ea3c404878aa4dfd"
+            ]
+        ]
+    },
+    {
+        "id": "ea3c404878aa4dfd",
+        "type": "http response",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Send response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1020,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3771ed8ba5129ef1",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Install",
+        "func": "msg.payload = {\n    installData: {}\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "bf62215a8c0e3eec"
+            ]
+        ]
+    },
+    {
+        "id": "bf62215a8c0e3eec",
+        "type": "http response",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Send response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1020,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6d7cef354a58d62a",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Update",
+        "func": "msg.payload = {\n    updateData: {}\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 320,
+        "wires": [
+            [
+                "cac7aa87f9bcc134"
+            ]
+        ]
+    },
+    {
+        "id": "cac7aa87f9bcc134",
+        "type": "http response",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Send response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1020,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "caaef30a92cf035d",
+        "type": "switch",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Event",
+        "property": "payload.lifecycle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "EVENT",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 400,
+        "wires": [
+            [
+                "e0ee6b56b9974bee"
+            ]
+        ]
+    },
+    {
+        "id": "e0ee6b56b9974bee",
+        "type": "function",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Event",
+        "func": "msg.payload = {\n    eventData: {}\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 400,
+        "wires": [
+            [
+                "55ce07defde62373"
+            ]
+        ]
+    },
+    {
+        "id": "55ce07defde62373",
+        "type": "http response",
+        "z": "a315ee6acb269508",
+        "g": "4083528b9bbd7930",
+        "name": "Send response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1020,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0104105a258d245e",
+        "type": "ha-entity-config",
+        "server": "a962aadcdd5cb1ef",
+        "deviceConfig": "fdf512f17c8a25de",
+        "name": "SmartThings Access Token",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "SmartThings Access Token"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:cloud-key"
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": "diagnostic"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "50668aba6f7facdd",
+        "type": "ha-entity-config",
+        "server": "a962aadcdd5cb1ef",
+        "deviceConfig": "fdf512f17c8a25de",
+        "name": "SmartThings Refresh Token",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "SmartThings Refresh Token"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:cloud-key-outline"
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": "diagnostic"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "df603eac9df15582",
+        "type": "ha-entity-config",
+        "server": "a962aadcdd5cb1ef",
+        "deviceConfig": "fdf512f17c8a25de",
+        "name": "SmartThings Timestamp",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "SmartThings Timestamp"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:eye"
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": "diagnostic"
+            },
+            {
+                "property": "device_class",
+                "value": "timestamp"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "9c7d903f06f4f403",
+        "type": "ha-entity-config",
+        "server": "a962aadcdd5cb1ef",
+        "deviceConfig": "fdf512f17c8a25de",
+        "name": "Next refresh",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Next refresh"
+            },
+            {
+                "property": "icon",
+                "value": "mdi:timer"
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": "diagnostic"
+            },
+            {
+                "property": "device_class",
+                "value": "duration"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "h"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "a962aadcdd5cb1ef",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": ": ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "default",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "fdf512f17c8a25de",
+        "type": "ha-device-config",
+        "name": "SmartThings",
+        "hwVersion": "",
+        "manufacturer": "Samsung",
+        "model": "",
+        "swVersion": ""
+    }
+]

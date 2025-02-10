@@ -13,7 +13,7 @@ A Node Red flow to daily renew SmartThings access tokens.
     }, 
     ```
     and restart Node Red. Additional information: [A guide to understanding Persistent Context](https://discourse.nodered.org/t/a-guide-to-understanding-persistent-context/4115)
-1. Deploy the SmartApp flow in Node Red – import the “smartapp oauth2 v1.0.json” file in Node Red
+1. Deploy the SmartApp flow in Node Red – import the “smartthings token.json” file in Node Red
 1. Create a SmartApp in [SmartThings Developer Workspace](https://developer.smartthings.com/workspace), using the redirectUrl. Write down the App Name, AppID, ClientID, Client Secret.
 1. Enter the variables AppName, AppId, ClientId, ClientSecret in Node Red node "Set Variables"
 1. Check the redirectUrl in Node Red node "Create SmartApp tokens" (e.g. /smartapp - everything after “https://< create url>:1880/endpoint)
