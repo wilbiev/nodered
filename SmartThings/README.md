@@ -2,6 +2,8 @@
 
 A Node Red flow to daily renew SmartThings access tokens.
 
+![SmartThings flow](images/smartthings_flow.png)
+
 ## Instructions for installation:
 
 1. Create public https connection Home Assistant [Home Assistant Remote Access for FREE - DuckDNS + LetsEncrypt + Single URL](https://www.youtube.com/watch?v=AK5E2T5tWyM). The redirectURL is: “https://<your_url>:1880/endpoint/smartapp"
