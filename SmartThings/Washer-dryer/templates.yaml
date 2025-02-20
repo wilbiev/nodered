@@ -1,0 +1,64 @@
+- select:
+  - name: "Select washerDryerDyLevel"
+    unique_id: 7f8aca37-be26-436d-9459-d82b6f9b96f1
+    state: "{{ states('select.washerdryerdrylevel') }}"
+    options: "{{ states('sensor.washerdryoptions') }}"
+    select_option:
+      - action: "select.select_option"
+        target:
+          entity_id: "select.washerdryerdrylevel"
+        data:
+          option: "{{ option }}"
+    icon: "mdi:waves-arrow-up"
+
+- select:
+  - name: "Select washerSpinLevel"
+    unique_id: 7f8aca37-be26-436d-9459-d82b6f9b96f2
+    state: "{{ states('select.washerspinlevel') }}"
+    options: "{{ states('sensor.washerspinoptions') }}"
+    select_option:
+      - action: "select.select_option"
+        target:
+          entity_id: "select.washerspinlevel"
+        data:
+          option: "{{ option }}"
+    icon: "mdi:autorenew"
+
+- select:
+  - name: "Select washerSoilLevel"
+    unique_id: 7f8aca37-be26-436d-9459-d82b6f9b96f2
+    state: "{{ states('select.washersoillevel') }}"
+    options: "{{ states('sensor.washersoiloptions') }}"
+    select_option:
+      - action: "select.select_option"
+        target:
+          entity_id: "select.washersoillevel"
+        data:
+          option: "{{ option }}"
+    icon: "mdi:brightness-7"
+
+- select:
+  - name: "Select washerRinseCycles"
+    unique_id: 7f8aca37-be26-436d-9459-d82b6f9b96f3
+    state: "{{ states('select.washerrinsecycles') }}"
+    options: "{{ states('sensor.washerrinseoptions') }}"
+    select_option:
+      - action: "select.select_option"
+        target:
+          entity_id: "select.washerrinsecycles"
+        data:
+          option: "{{ option }}"
+    icon: "mdi:water-sync"
+
+- select:
+  - name: "Select washerWaterTemperature"
+    unique_id: 7f8aca37-be26-436d-9459-d82b6f9b96f4
+    state: "{{ states('select.washerwatertemperature') }}"
+    options: "{{ states('sensor.washertempoptions') }}"
+    select_option:
+      - action: "select.select_option"
+        target:
+          entity_id: "select.washerwatertemperature"
+        data:
+          option: "{{ option }}"
+    icon: "mdi:temperature-celsius"

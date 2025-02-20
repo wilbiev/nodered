@@ -1,0 +1,436 @@
+---
+# Samsung Washer-Dryer - configuration (based on build Node Red integration)
+
+# shows the power consumption of the washer in kW
+Capability: powerConsumptionReport
+Attribute: powerConsumption
+HA entitiy: sensor.washerenergy
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.remainingAmount.value
+
+# shows the cummulative amout of water usage in L
+Capability: samsungce.waterConsumptionReport
+Attribute: waterConsumption
+HA entitiy: sensor.washerconsumption
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.waterConsumption.value.cumulativeAmount / 1000
+
+# shows the remaining amount of detergent ["less", "unknown", "normal"]
+Capability: samsungce.autoDispenseDetergent
+Attribute: remainingAmount
+HA entitiy: sensor.remainingdetergent
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.remainingAmount.value
+
+# shows the remaining amount of softener ["less", "unknown", "normal"]
+Capability: samsungce.autoDispenseSoftener
+Attribute: remainingAmount
+HA entitiy: sensor.remainingsoftener
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.remainingAmount.value
+
+# shows the water temperature in celcius
+Capability: custom.washerWaterTemperature
+Attribute: washerWaterTemperature
+Command: [{"component":"main","capability":"custom.washerWaterTemperature","command":"setWasherWaterTemperature","arguments":[$string(msg.payload, true)]}]
+HA entitiy: select.washerwatertemperature
+Entity options: ["none", "cold", "20", "30", "40", "60", "70", "90"] 
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.washerWaterTemperature.value
+
+# shows the spinlevel in turns per minute
+Capability: custom.washerSpinLevel
+Attribute: washerSpinLevel
+Command: [{"component":"main","capability":"custom.washerSpinLevel","command":"setWasherSpinLevel","arguments":[$string(msg.payload, true)]}]
+HA entitiy: select.washerspinlevel
+Entity options: ["rinseHold", "noSpin", "400", "800", "1000", "1200", "1400"] 
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.washerSpinLevel.value
+
+# show the amount of rinse cycles during a washing course
+Capability: custom.washerRinseCycles
+Attribute: washerRinseCycles
+Command: [{"component":"main","capability":"custom.washerRinseCycles","command":"setWasherRinseCycles","arguments":[$string(msg.payload, true)]}]
+HA entitiy: select.washerrinsecycles
+Entity options: ["0", "1", "2", "3", "4", "5"]
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.washerRinseCycles.value
+
+# shows the amount of drying in minutes
+Capability: custom.dryerDryLevel
+Attribute: dryerDryLevel
+Command: [{"component":"main","capability":"custom.washerRinseCycles","command":"setWasherRinseCycles","arguments":[$string(msg.payload, true)]}]
+HA entitiy: select.washerdryerdrylevel
+Entity options: ["none", "cupboard", "30", "60", "90", "120", "180", "240"]
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.dryerDryLevel.value
+
+# starts a washing course
+Capability: samsungce.washerOperatingState
+Command: [{"component":"main","capability":"samsungce.washerOperatingState","command":"start","arguments":[]}]
+HA entitiy: button.washerstatestart
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+
+# cancels a washing course
+Capability: samsungce.washerOperatingState
+Command: [{"component":"main","capability":"samsungce.washerOperatingState","command":"cancel","arguments":[]}]
+HA entitiy: button.washerstatestop
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+
+# pauses or resumes a running washing course
+Capability: samsungce.washerOperatingState
+Command:  msg.payload == pause [{"component":"main","capability":"samsungce.washerOperatingState","command":"pause","arguments":[]}]
+          msg.payload == resume [{"component":"main","capability":"samsungce.washerOperatingState","command":"resume","arguments":[]}]
+HA entitiy: button.washerstatepauseresume
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+custom code: if (msg.payload == "resume") {msg.payload = "pause";} else {msg.payload = "resume";}
+
+# custom implementation to define a switch per washing course - only one switch can be active while only one washing course can be selected
+Capability: samsungce.washerCycle
+Command: [{"component":"main","capability":"samsungce.washerCycle","command":"setWasherCycle","arguments":[$string(msg.value, true)]}]
+HA entitiy: switch.<course>   # a switch entity defined for every course
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload   # output of retrieve program function
+
+# estimates the operation time for a selected course in minutes
+Capability: samsungce.washerOperatingState
+Command: [{"component":"main","capability":"samsungce.washerOperatingState","command":"estimateOperationTime","arguments":[]}]
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+
+# shows the delay time in minutes to start the washing course
+Capability: samsungce.washerDelayEnd
+Attribute: remainingTime
+HA entitiy: sensor.washerremainingdelaytime
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.remainingTime.value
+
+# shows the progress in %
+Capability: samsungce.washerOperatingState
+Attribute: progress
+HA entitiy: sensor.washeros-progress
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.progress.value
+
+# shows the time left in minutes
+Capability: samsungce.washerOperatingState
+Attribute: remainingTime
+HA entitiy: sensor.washerremainingtime
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.remainingTime.value
+
+# shows operating state ["ready", "running", "finished"]
+Capability: samsungce.washerOperatingState
+Attribute: operatingState
+HA entitiy: sensor.operatingstate
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.operatingState.value
+
+# shows operation time of selected washer course in minutes
+Capability: samsungce.washerOperatingState
+Attribute: operationTime
+HA entitiy: sensor.operationtime
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.payload.operationTime.value
+
+# shows washer job phase state ["wash", "rinse", "spin", "drying"]
+Capability: samsungce.washerOperatingState
+Attribute: washerJobState
+HA entitiy: sensor.washerjobstate
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.washerJobState.value
+
+# shows washer job state ["wash", "rinse", "spin", "drying", "finish"]
+Capability: washerOperatingState
+Attribute: washerJobState
+HA entitiy: sensor.washeroperatingjob
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.washerJobState.value
+
+# shows the machine state ["stop","run","pause"]
+Capability: washerOperatingState
+Attribute: machineState
+HA entitiy: sensor.washeroperatingstate
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value: msg.payload.machineState.value
+
+# turn on/off automatic detergent
+Capability: samsungce.autoDispenseDetergent
+Attribute: remainingAmount
+Command:  msg.payload == "on" [{"component": "main","capability": "samsungce.autoDispenseDetergent","command": "setAmount","arguments": ["standard"]}]
+          msg.payload == "off" [{"component": "main","capability": "samsungce.autoDispenseDetergent","command": "setAmount","arguments": ["none"]}]
+HA entitiy: switch.autodispensesdetergent
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value:  msg.payload.amount.value == "none" -> msg.enable: false
+        msg.payload.amount.value == "standard" -> msg.enable: true
+
+# turn on/off automatic softener
+Capability: samsungce.autoDispenseSoftener
+Attribute: remainingAmount
+Command:  msg.payload == "on" [{"component": "main","capability": "samsungce.autoDispenseSoftener","command": "setAmount","arguments": ["standard"]}]
+          msg.payload == "off" [{"component": "main","capability": "samsungce.autoDispenseSoftener","command": "setAmount","arguments": ["none"]}]
+HA entitiy: switch.autodispensesoftener
+
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value:  msg.payload.amount.value == "none" -> msg.enable: false
+        msg.payload.amount.value == "standard" -> msg.enable: true
+
+# turn on/off washer ["on", "off"] (needs subscription event to function)
+Capability: switch
+Command:  msg.payload == true [{"component":"main","capability":"switch","command":"on","arguments":[]}]
+          msg.payload == false [{"component":"main","capability":"switch","command":"off","arguments":[]}]
+HA entitiy: switch.wasmachine
+
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value:  msg,payload.status.value == "off" -> msg.enable: false
+        msg.payload.status.value == "on" -> msg.enable: true
+
+# turn on/off BubbleSoak ["on", "off"]
+Capability: samsungce.washerBubbleSoak
+Command:  msg.payload == true [{"component":"main","capability":"samsungce.washerBubbleSoak","command":"on","arguments":[]}]
+          msg.payload == false [{"component":"main","capability":"samsungce.washerBubbleSoak","command":"off","arguments":[]}]
+HA entitiy: switch.wasmachine
+
+# Set value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: POST
+# Get value
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value:  msg,payload.status.value == "off" -> msg.enable: false
+        msg.payload.status.value == "on" -> msg.enable: true
+
+# shows remotecontrol status ["on", "off"]
+Capability: remoteControlStatus
+Attribute: remoteControlEnabled
+HA entitiy: sensor.remotecontrolstatus
+msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status"
+msg.header:  {
+    "Authorization": "Bearer {accessToken}",
+    'Content-Type': "application/json"
+}
+HTTP request: GET
+value:  msg,payload.remoteControlEnabled.value == false -> msg.payload = "on"
+        msg.payload.remoteControlEnabled.value == true -> msg.payload = "off"
+
+# shows if selected course supports BubbleSoak  ["on", "off"]
+HA entitiy: sensor.prewashsupported
+value: programList.BubbleSoak
+
+# shows waterTemerature options for selected course
+HA entitiy: sensor.washertempoptions
+value: programList.selectTemp
+
+# shows spinLevel options for selected course
+HA entitiy: sensor.washerspinoptions
+value: programList.selectSpin
+
+# shows soilLevel options for selected course
+HA entitiy: sensor.washersoiloptions
+value: programList.selectSoil
+
+# shows rinseCycle options for selected course
+HA entitiy: sensor.washerrinseoptions
+value: programList.selectRinse
+
+# shows dryLevel options for selected course
+HA entitiy: sensor.washerdryoptions
+value: programList.selectDry
+
+
+
+
+
+
+
