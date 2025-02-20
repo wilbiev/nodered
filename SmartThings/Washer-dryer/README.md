@@ -28,7 +28,7 @@ The washerOperatingState keeps the state ‘running’ when finishing a course. 
 ### Refresh / rate limits
 My solution includes a subscription to receive all relevant events. On top it retrieves updated information from the API to prevent ‘unknown’ states of the HA entities alive when the washer is not used. Refresh time for washer with remote control disabled is 5 minutes. Refresh time for washer with remote control enabled is 1 hour. The rate of API requests is limited: [Rate Limits and Guardrails | Developer Documentation | SmartThings](https://developer.smartthings.com/docs/getting-started/rate-limits). I experienced a much lower rate limit when using a Personal Access Token (PAT) instead of an OAuth token.
 
-### Additonal resources:
+## Additonal resources:
 * Building SmartApp to receive access and refresh tokens: [Building First SmartApp for Dummies - Developer Programs / Writing SmartApps - SmartThings Community](https://community.smartthings.com/t/building-first-smartapp-for-dummies/251219)
 * SmartThings SmartApp Lifecycles: [Lifecycles Developer Documentation SmartThings](https://developer.smartthings.com/docs/connected-services/lifecycles)
 * SmartThings API documentation: [API Developer Documentation SmartThings](https://developer.smartthings.com/docs/api/public)
