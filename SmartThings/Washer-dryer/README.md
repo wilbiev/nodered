@@ -1,10 +1,8 @@
 # Samsung SmartThings Washer(/Dryer) project
 
 <p align="top" width="100%">
-    <img width="50%" src="../images/dashboard1.png">
+    <img width="33%" src="../images/dashboard1.png">    <img width="33%" src="../images/dashboard2.png">
 </p>
-
-![Dashboard 1](../images/dashboard1.png)            ![Dashboard 2](../images/dashboard2.png)
 
 ## The problem
 A Samsung washer supports several pre-defined courses. Every course has different default settings and options. Users should only be able to select valid options when starting a washer course. To accomplish this an implementation of a dynamic options list is required which can change based on the selected course.
