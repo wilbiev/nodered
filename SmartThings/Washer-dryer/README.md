@@ -1,9 +1,11 @@
 # Samsung SmartThings Washer(/Dryer) project
 
 <p width="100%">
-    <img align=right width="33%" src="../images/dashboard2.png">
-    <p>
     <img align=right width="33%" src="../images/dashboard1.png">
+</p>
+
+<p width="100%">
+    <img align=right width="33%" src="../images/dashboard2.png">
 </p>
 
 ## The problem
