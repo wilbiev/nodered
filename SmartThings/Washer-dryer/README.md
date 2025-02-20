@@ -1,5 +1,9 @@
 # Samsung SmartThings Washer(/Dryer) project
 
+<p align="top" width="100%">
+    <img width="50%" src="../images/dashboard1.png">
+</p>
+
 ![Dashboard 1](../images/dashboard1.png)            ![Dashboard 2](../images/dashboard2.png)
 
 ## The problem
