@@ -40,6 +40,6 @@ My solution includes a subscription to receive all relevant events. On top it re
 Dashboards were created in custom HACS integration [UI Lovelace Minimalist](https://github.com/UI-Lovelace-Minimalist/UI).
 
 <p width="100%">
-    <img align=left width="50%" src="../images/dashboard1.png">
-    <img align=right width="50%" src="../images/dashboard2.png">
+    <img align=left width="43%" src="../images/dashboard1.png">
+    <img align=right width="43%" src="../images/dashboard2.png">
 </p>
