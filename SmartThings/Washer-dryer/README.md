@@ -35,6 +35,14 @@ My solution includes a subscription to receive all relevant events. On top it re
 * Create PAT-token: SmartThings. [Add a little smartness to your things.](https://account.smartthings.com/tokens)
 * HA SmartThings washer: [Home Assistant Community - Can smart Samsung washing machines be started with the SmartThings integration?](https://community.home-assistant.io/t/can-smart-samsung-washing-machines-be-started-with-the-smartthings-integration/435701/14)
 
+## Node Red flow
+
+The flow created in Node Red. The flow includes 3 custom defined washer courses.
+
+<p width="100%">
+    <img align=left width="100%" src="../images/samsung_washer.png">
+</p>
+
 ## Home Assistant Dashboards
 
 Dashboards were created in custom HACS integration [UI Lovelace Minimalist](https://github.com/UI-Lovelace-Minimalist/UI).
@@ -42,12 +50,4 @@ Dashboards were created in custom HACS integration [UI Lovelace Minimalist](http
 <p width="100%">
     <img align=left width="43%" src="../images/dashboard1.png">
     <img align=right width="43%" src="../images/dashboard2.png">
-</p>
-
-## Node Red flow
-
-The flow created in Node Red. The flow includes 3 custom defined washer courses.
-
-<p width="100%">
-    <img align=left width="100%" src="../images/samsung_washer.png">
 </p>
