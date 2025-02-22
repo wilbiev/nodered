@@ -41,6 +41,5 @@ Dashboards were created in custom HACS integration [UI Lovelace Minimalist](http
 
 <p align=center width="100%">
     <img width="33%" src="../images/dashboard2.png">
-    <p>
     <img width="33%" src="../images/dashboard1.png">
 </p>
