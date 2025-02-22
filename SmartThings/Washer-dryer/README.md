@@ -3,15 +3,17 @@
 ### The flow
 With this Node Red flow you can fully control your Samsung Washer-Dryer (if supported). The flow sends POST and GET request to the [SmartThings API](https://developer.smartthings.com/docs/api/public) based on capabilities and attributes. The capabilities and attributes for your device can be retrieved in the [SmartThings API device capabilities](https://my.smartthings.com/advanced/devices). I included an overview of the used capabilities/attributes/commands and HA entities [here](https://github.com/wilbiev/nodered/blob/main/SmartThings/Washer-dryer/washer-dryer.yaml). Remote control needs to be enabled on the washer to control it.
 
-### Dynamic options - the problem
+## Dynamic options
+
+### The problem
 A Samsung washer supports several pre-defined courses. Every course has different default settings and options. Users should only be able to select valid options when starting a washer course. To accomplish this an implementation of a dynamic options list is required which can change based on the selected course.
 Applies to: RinseCycle, SpinLevel, SoilLevel (not tested), WaterTemperature, DryLevel.
 
-### Dynamic options - additional challenges
+### Additional challenges
 * Samsung uses default values for courses which are not part of the supported options (e.g. empty supported options list, default value is “none”).
 * Samsung uses values which are not part of the supported options (e.g. course 29 uses temperature “70” which is not part of the option list and can even not be applied via a capability/attribute. It can only be set by the washer by selecting the course).
 
-### Dynamic options - the solution
+### The solution
 1.	When loading the integration [create a list of all courses with the supported options](https://github.com/wilbiev/nodered/blob/main/SmartThings/Washer-dryer/build_option_list.js). The list contains the following items: course name, course type, bubbleSoak supported, optionlist dryLevel, optionlist spinLevel, optionlist soilLevel, optionlist rinseCycles, optionlist waterTemperature. List can be retrieved by a GET request to ‘https://api.smartthings.com/v1/devices/{deviceId}/components/{componentId}/capabilities/{capabilityId}/status’, capabilityId is ‘samsungce.washerCycle’. (Personal note: in my solution the list is refreshed when retrieving a new access token, every 24 hours)
 1.	Define HA select entities for dryLevel (if supported), spinLevel, soilLevel (if supported), rinseCycles,  waterTemperature which are required to enable the user select different options for a washer course (e.g. lower washing temperature). Option list of the entities should support all possible options for the device. (Personal note: in my case dryLevel: [‘none’, ‘cupboard’, ‘30’, ‘60’, ‘90’, ‘120’, ‘180’, ‘240’], spinLevel: [‘rinseHold’, ‘noSpin’, ‘400’, ‘800’, ‘1000’, ‘1200’, ‘1400’], soilLevel: [‘extra heavy’, ‘heavy’, ‘normal’, ‘light’, ‘extra light’], rinseCycles: [‘0’, ‘1’, ‘2’, ‘3’, ‘4’, ‘5’], waterTemperature: [‘none’, ‘cold’, ‘20’, ‘30’, ‘40’, ‘60’, ‘70’, ‘90’])
 1.	Define HA sensor entities for dryLevel (if supported), spinLevel, soilLevel (if supported), rinseCycles,  waterTemperature which contains the option values from the created list based on the selected course.
