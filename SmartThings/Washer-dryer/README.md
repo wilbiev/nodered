@@ -3,7 +3,7 @@
 ### The flow
 With this Node Red flow you can fully control your Samsung Washer-Dryer (if supported). The flow sends POST and GET request to the [SmartThings API](https://developer.smartthings.com/docs/api/public) based on capabilities and attributes. The capabilities and attributes for your device can be retrieved in the [SmartThings API device capabilities](https://my.smartthings.com/advanced/devices). I included an overview of the used capabilities/attributes/commands and HA entities [here](https://github.com/wilbiev/nodered/blob/main/SmartThings/Washer-dryer/washer-dryer.yaml). Remote control needs to be enabled on the washer to control it.
 
-### The problem
+### Dynamic options
 A Samsung washer supports several pre-defined courses. Every course has different default settings and options. Users should only be able to select valid options when starting a washer course. To accomplish this an implementation of a dynamic options list is required which can change based on the selected course.
 Applies to: RinseCycle, SpinLevel, SoilLevel (not tested), WaterTemperature, DryLevel
 
