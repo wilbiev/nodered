@@ -43,3 +43,11 @@ Dashboards were created in custom HACS integration [UI Lovelace Minimalist](http
     <img align=left width="43%" src="../images/dashboard1.png">
     <img align=right width="43%" src="../images/dashboard2.png">
 </p>
+
+## Node Red flow
+
+The flow created in Node Red. The flow includes 3 custom defined washer courses.
+
+<p width="100%">
+    <img align=left width="100%" src="../images/samsung_washer.png">
+</p>
