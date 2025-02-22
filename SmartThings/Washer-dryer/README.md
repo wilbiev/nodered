@@ -37,7 +37,7 @@ My solution includes a subscription to receive all relevant events. On top it re
 
 ## Node Red flow
 
-The flow created in Node Red. The flow includes 3 custom defined washer courses.
+The flow created in Node Red. The flow includes 3 custom defined washer courses. Event handling takes place in a separate flow.
 
 <p width="100%">
     <img align=left width="100%" src="../images/samsung_washer.png">
