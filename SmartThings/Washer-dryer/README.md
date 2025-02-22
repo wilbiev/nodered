@@ -1,11 +1,5 @@
 # Samsung SmartThings Washer(/Dryer) project
 
-<p width="100%">
-    <img align=right width="33%" src="../images/dashboard2.png">
-    <p>
-    <img align=right width="33%" src="../images/dashboard1.png">
-</p>
-
 ### The problem
 A Samsung washer supports several pre-defined courses. Every course has different default settings and options. Users should only be able to select valid options when starting a washer course. To accomplish this an implementation of a dynamic options list is required which can change based on the selected course.
 Applies to: RinseCycle, SpinLevel, SoilLevel (not tested), WaterTemperature, DryLevel
@@ -40,3 +34,13 @@ My solution includes a subscription to receive all relevant events. On top it re
 * SmartThings API device capabilities: [SamrtThnigs](https://my.smartthings.com/advanced/devices)
 * Create PAT-token: SmartThings. [Add a little smartness to your things.](https://account.smartthings.com/tokens)
 * HA SmartThings washer: [Home Assistant Community - Can smart Samsung washing machines be started with the SmartThings integration?](https://community.home-assistant.io/t/can-smart-samsung-washing-machines-be-started-with-the-smartthings-integration/435701/14)
+
+## Home Assistant Dashboards
+
+Dashboards were created in custom HACS integration [UI Lovelace Minimalist](https://github.com/UI-Lovelace-Minimalist/UI).
+
+<p align=center width="100%">
+    <img width="33%" src="../images/dashboard2.png">
+    <p>
+    <img width="33%" src="../images/dashboard1.png">
+</p>
