@@ -342,8 +342,8 @@ msg.header:  {
     'Content-Type': "application/json"
 }
 HTTP request: GET
-value:  msg.payload.amount.value == "none" -> msg.enable: false
-        msg.payload.amount.value == "standard" -> msg.enable: true
+value:  msg.payload.amount.value == "none" -> msg.enable = false
+        msg.payload.amount.value == "standard" -> msg.enable = true
 
 # turn on/off washer ["on", "off"] (needs subscription event to function)
 Capability: switch
@@ -365,8 +365,8 @@ msg.header:  {
     'Content-Type': "application/json"
 }
 HTTP request: GET
-value:  msg,payload.status.value == "off" -> msg.enable: false
-        msg.payload.status.value == "on" -> msg.enable: true
+value:  msg,payload.switch.value == "off" -> msg.enable = false
+        msg.payload.switch.value == "on" -> msg.enable = true
 
 # turn on/off BubbleSoak ["on", "off"]
 Capability: samsungce.washerBubbleSoak
@@ -388,8 +388,8 @@ msg.header:  {
     'Content-Type': "application/json"
 }
 HTTP request: GET
-value:  msg,payload.status.value == "off" -> msg.enable: false
-        msg.payload.status.value == "on" -> msg.enable: true
+value:  msg,payload.status.value == "off" -> msg.enable = false
+        msg.payload.status.value == "on" -> msg.enable = true
 
 # shows remotecontrol status ["on", "off"]
 Capability: remoteControlStatus
