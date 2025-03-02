@@ -372,7 +372,7 @@ value:  msg,payload.status.value == "off" -> msg.enable: false
 Capability: samsungce.washerBubbleSoak
 Command:  msg.payload == true [{"component":"main","capability":"samsungce.washerBubbleSoak","command":"on","arguments":[]}]
           msg.payload == false [{"component":"main","capability":"samsungce.washerBubbleSoak","command":"off","arguments":[]}]
-HA entitiy: switch.wasmachine
+HA entitiy: switch.bubblesoak
 
 # Set value
 msg.url: "https://api.smartthings.com/v1/devices/{deviceId}/commands"
