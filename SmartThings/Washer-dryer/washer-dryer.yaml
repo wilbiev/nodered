@@ -11,7 +11,7 @@ msg.header:  {
     'Content-Type': "application/json"
 }
 HTTP request: GET
-value: msg.payload.remainingAmount.value
+value: msg.payload.powerConsumption.value.energy / 1000;
 
 # shows the cummulative amout of water usage in L
 Capability: samsungce.waterConsumptionReport
